@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>INDIRECT VPN</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div id="loader">
+    <div class="loader-logo">
+        <img src="logo.png" alt="INDIRECT VPN">
+    </div>
+    <div class="loader-bar-wrap">
+        <div class="loader-bar" id="loaderBar"></div>
+    </div>
+    <div class="loader-text" id="loaderText">INITIALIZING...</div>
+</div>
+
+<div id="app" class="hidden">
+    <header class="header">
+        <div class="header-logo">
+            <img src="logo.png" alt="INDIRECT VPN">
+            <span>INDIRECT VPN</span>
+        </div>
+        <div class="header-status" id="headerStatus">● DISCONNECTED</div>
+    </header>
+
+    <main class="main">
+        <div class="power-zone">
+            <div class="power-ring disconnected" id="powerRing">
+                <button class="power-btn" id="powerBtn" type="button">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
+                        <path d="M12 2v10"/>
+                        <path d="M18.36 6.64a9 9 0 1 1-12.73 0"/>
+                    </svg>
+                </button>
+            </div>
+            <div class="power-label" id="powerLabel">TAP TO CONNECT</div>
+        </div>
+
+        <div class="status-panel">
+            <div class="status-item">
+                <div class="status-label">IP ADDRESS</div>
+                <div class="status-value" id="ipValue">— . — . — . —</div>
+            </div>
+
+            <div class="status-item">
+                <div class="status-label">LOCATION</div>
+                <div class="status-value" id="locValue">NOT CONNECTED</div>
+            </div>
+
+            <div class="status-item">
+                <div class="status-label">PING</div>
+                <div class="status-value" id="pingValue">— ms</div>
+            </div>
+
+            <div class="status-item">
+                <div class="status-label">DOWNLOAD</div>
+                <div class="status-value" id="downValue">— Mbps</div>
+            </div>
+        </div>
+
+        <div class="server-section">
+            <div class="server-title">SELECT SERVER</div>
+            <div class="server-list" id="serverList"></div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <span>INDIRECT VPN</span>
+        <span>v1.0.0</span>
+    </footer>
+</div>
+
+<div id="popup" class="popup hidden">
+    <div class="popup-stage">
+        <img src="logo.png" alt="INDIRECT VPN" class="popup-ninja" id="popupNinja">
+        <div class="popup-smoke" id="popupSmoke"></div>
+    </div>
+    <div class="popup-text" id="popupText"></div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
