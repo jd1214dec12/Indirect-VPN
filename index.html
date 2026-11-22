@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Shadow AI</title>
+<style>
+    body { background: #111; color: #fff; font-family: monospace; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; }
+    .chat-box { width: 90%; max-width: 500px; height: 80vh; display: flex; flex-direction: column; border: 1px solid #333; padding: 20px; border-radius: 10px; background: #000; }
+    .messages { flex: 1; overflow-y: auto; margin-bottom: 10px; display: flex; flex-direction: column; gap: 10px; }
+    .msg { padding: 10px; border-radius: 5px; max-width: 80%; word-wrap: break-word; }
+    .user { background: #333; align-self: flex-end; }
+    .ai { background: #ff0000; color: #000; align-self: flex-start; }
+    .input-area { display: flex; gap: 10px; }
+    input { flex: 1; padding: 10px; background: #111; border: 1px solid #444; color: #fff; outline: none; font-family: monospace; }
+    button { padding: 10px 20px; background: #ff0000; color: #000; border: none; font-weight: bold; cursor: pointer; }
+</style>
+</head>
+<body>
+
+<div class="chat-box">
+    <div class="messages" id="messages"></div>
+    <div class="input-area">
+        <input type="text" id="userInput" placeholder="Type message..." autocomplete="off">
+        <button onclick="sendMessage()">Send</button>
+    </div>
+</div>
+
+<script>
+async function sendMessage() {
+    const input = document.getElementById('userInput');
+    const messagesDiv = document.getElementById('messages');
+    const text = input.value.trim();
+    if(!text) return;
+
+    
+    messagesDiv.innerHTML += `<div class="msg user">${text}</div>`;
+    input.value = '';
+    messagesDiv.scrollTop = messagesDiv.scrollHeight;
+
+    try {
+        
+        const response = await fetch('/api/chat', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ message: text })
+        });
+
+        const data = await response.json();
+      
+        messagesDiv.innerHTML += `<div class="msg ai">${data.reply}</div>`;
+        messagesDiv.scrollTop = messagesDiv.scrollHeight;
+
+    } catch (error) {
+        messagesDiv.innerHTML += `<div class="msg ai">Error connecting to AI core.</div>`;
+    }
+}
+</script>
+</body>
+</html>
