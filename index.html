@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Shadow AI - Groq</title>
+<title>Shadow Void AI</title>
 <style>
     body { 
         background: #050505; 
@@ -22,56 +22,75 @@
         display: flex; 
         flex-direction: column; 
         border: 1px solid #333; 
-        border-radius: 10px; 
+        border-radius: 12px; 
         background: #000; 
         overflow: hidden;
-        box-shadow: 0 0 20px rgba(255, 0, 0, 0.1);
+        box-shadow: 0 0 30px rgba(255, 0, 0, 0.15);
     }
+    
     .profile-header {
         display: flex;
         align-items: center;
-        padding: 15px 20px;
-        background: #0a0a0a;
-        border-bottom: 1px solid #ff0000;
-        gap: 15px;
+        padding: 20px 25px;
+        background: linear-gradient(180deg, #1a0000 0%, #000000 100%);
+        border-bottom: 2px solid #ff0000;
+        gap: 18px;
+        position: relative;
+    }
+    .profile-header::after {
+        content: '';
+        position: absolute;
+        bottom: -2px;
+        left: 0;
+        width: 40%;
+        height: 2px;
+        background: #fff;
+        box-shadow: 0 0 10px #fff;
     }
     .profile-pic {
-        width: 45px;
-        height: 45px;
+        width: 65px;
+        height: 65px;
         border-radius: 50%;
-        border: 2px solid #ff0000;
+        border: 3px solid #ff0000;
         object-fit: cover;
-        box-shadow: 0 0 10px rgba(255, 0, 0, 0.5);
+        box-shadow: 0 0 20px rgba(255, 0, 0, 0.6);
+        background: #111;
     }
     .profile-info {
         display: flex;
         flex-direction: column;
+        gap: 4px;
     }
     .profile-name {
-        font-weight: bold;
-        font-size: 1.1rem;
+        font-weight: 900;
+        font-size: 1.4rem;
         color: #fff;
-        letter-spacing: 1px;
+        letter-spacing: 2px;
+        text-shadow: 0 0 8px rgba(255, 0, 0, 0.8), 0 0 15px rgba(255, 0, 0, 0.4);
     }
     .profile-status {
-        font-size: 0.75rem;
+        font-size: 0.8rem;
         color: #ff0000;
         display: flex;
         align-items: center;
-        gap: 5px;
+        gap: 6px;
+        font-weight: bold;
+        letter-spacing: 1px;
     }
     .status-dot {
-        width: 8px;
-        height: 8px;
+        width: 10px;
+        height: 10px;
         background: #ff0000;
         border-radius: 50%;
+        box-shadow: 0 0 10px #ff0000;
         animation: pulse 1.5s infinite;
     }
     @keyframes pulse {
         0% { box-shadow: 0 0 0 0 rgba(255, 0, 0, 0.7); }
-        70% { box-shadow: 0 0 0 5px rgba(255, 0, 0, 0); }
+        70% { box-shadow: 0 0 0 8px rgba(255, 0, 0, 0); }
         100% { box-shadow: 0 0 0 0 rgba(255, 0, 0, 0); }
     }
+
     .messages { 
         flex: 1; 
         overflow-y: auto; 
@@ -79,65 +98,71 @@
         display: flex; 
         flex-direction: column; 
         gap: 15px; 
+        background: radial-gradient(circle at center, #0a0a0a 0%, #000 100%);
     }
     .msg { 
-        padding: 12px 16px; 
-        border-radius: 8px; 
+        padding: 12px 18px; 
+        border-radius: 10px; 
         max-width: 85%; 
         word-wrap: break-word; 
-        line-height: 1.4;
-        font-size: 0.9rem;
+        line-height: 1.5;
+        font-size: 0.95rem;
     }
     .user { 
         background: #1a1a1a; 
         border: 1px solid #333;
         align-self: flex-end; 
-        border-bottom-right-radius: 0;
+        border-bottom-right-radius: 2px;
+        color: #ddd;
     }
     .ai { 
         background: #ff0000; 
         color: #000; 
-        font-weight: bold;
+        font-weight: 700;
         align-self: flex-start; 
-        border-bottom-left-radius: 0;
-        box-shadow: 0 0 10px rgba(255, 0, 0, 0.3);
+        border-bottom-left-radius: 2px;
+        box-shadow: 0 0 15px rgba(255, 0, 0, 0.4);
+        border: 1px solid #ff4444;
     }
+
     .input-area { 
         display: flex; 
         gap: 10px; 
-        padding: 15px;
-        background: #0a0a0a;
+        padding: 15px 20px;
+        background: #050505;
         border-top: 1px solid #222;
     }
     input { 
         flex: 1; 
-        padding: 12px; 
+        padding: 14px; 
         background: #111; 
-        border: 1px solid #333; 
+        border: 1px solid #444; 
         color: #fff; 
         outline: none; 
         font-family: monospace; 
-        border-radius: 5px;
+        border-radius: 8px;
         transition: 0.3s;
+        font-size: 0.95rem;
     }
     input:focus {
         border-color: #ff0000;
-        box-shadow: 0 0 10px rgba(255, 0, 0, 0.3);
+        box-shadow: 0 0 15px rgba(255, 0, 0, 0.3);
     }
     button { 
-        padding: 12px 20px; 
+        padding: 14px 25px; 
         background: #ff0000; 
         color: #000; 
         border: none; 
-        font-weight: bold; 
-        border-radius: 5px;
+        font-weight: 900; 
+        border-radius: 8px;
         cursor: pointer; 
         font-family: monospace;
         transition: 0.3s;
+        font-size: 0.95rem;
     }
     button:hover {
-        background: #cc0000;
-        box-shadow: 0 0 15px rgba(255, 0, 0, 0.5);
+        background: #fff;
+        box-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
     }
 </style>
 </head>
@@ -146,20 +171,20 @@
 <div class="chat-box">
     
     <div class="profile-header">
-        <img src="https://images.unsplash.com/photo-1618331835717-801e976710b2?q=80&w=100&auto=format&fit=crop" alt="Shadow Profile" class="profile-pic">
+        <img src="https://images.unsplash.com/photo-1618331835717-801e976710b2?q=80&w=200&auto=format&fit=crop" alt="Shadow Void" class="profile-pic">
         <div class="profile-info">
-            <div class="profile-name">SHΔDØW CORE</div>
-            <div class="profile-status"><div class="status-dot"></div> Online & Ready</div>
+            <div class="profile-name">SHADOW VOID</div>
+            <div class="profile-status"><div class="status-dot"></div> ONLINE</div>
         </div>
     </div>
 
     <div class="messages" id="messages">
-        <div class="msg ai">Hi, motherfucker. Ready to work? Drop your command.</div>
+        <div class="msg ai">I am the void. I am listening. What do you seek?</div>
     </div>
 
     <div class="input-area">
-        <input type="text" id="userInput" placeholder="Type message..." autocomplete="off" onkeypress="if(event.key==='Enter') sendMessage()">
-        <button onclick="sendMessage()">Send</button>
+        <input type="text" id="userInput" placeholder="Speak..." autocomplete="off" onkeypress="if(event.key==='Enter') sendMessage()">
+        <button onclick="sendMessage()">SEND</button>
     </div>
 </div>
 
@@ -190,7 +215,7 @@ async function sendMessage() {
         document.getElementById(loadingId).remove();
 
         if(data.error) {
-            messagesDiv.innerHTML += `<div class="msg ai" style="background:#900">Error: ${data.error}</div>`;
+            messagesDiv.innerHTML += `<div class="msg ai" style="background:#900; color:#fff; border-color:#f00;">Error: ${data.error}</div>`;
         } else {
             messagesDiv.innerHTML += `<div class="msg ai">${data.reply}</div>`;
         }
@@ -198,7 +223,7 @@ async function sendMessage() {
 
     } catch (error) {
         document.getElementById(loadingId).remove();
-        messagesDiv.innerHTML += `<div class="msg ai" style="background:#900">Error connecting to AI core.</div>`;
+        messagesDiv.innerHTML += `<div class="msg ai" style="background:#900; color:#fff; border-color:#f00;">Connection failed.</div>`;
     }
 }
 </script>
